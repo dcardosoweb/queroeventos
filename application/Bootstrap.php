@@ -81,7 +81,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
         Zend_Controller_Action_HelperBroker::addPrefix('Queroeventos_Controller_Action_Helper_');
 
         $acl = new Queroeventos_Acl();
-        $aclHelper = new Bndes_Controller_Action_Helper_Acl(null, array('acl' => $acl));
+        $aclHelper = new Queroeventos_Controller_Action_Helper_Acl(null, array('acl' => $acl));
         Zend_Controller_Action_HelperBroker::addHelper($aclHelper);
     }
 
