@@ -78,20 +78,18 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 
     protected function _initActionHelpers()
     {
+        Zend_Controller_Action_HelperBroker::addPrefix('Queroeventos_Controller_Action_Helper_');
 
-        /**
-         * TODO: Criar os helpers necessários(ACL e outros)
-         */
-
+        $acl = new Queroeventos_Acl();
+        $aclHelper = new Bndes_Controller_Action_Helper_Acl(null, array('acl' => $acl));
+        Zend_Controller_Action_HelperBroker::addHelper($aclHelper);
     }
 
     protected function _initDocType()
     {
-
         $this->bootstrap('view');
         $view = $this->getResource('view');
         $view->doctype('XHTML1_STRICT');
-
     }
 
     protected function _initZendAuth()
