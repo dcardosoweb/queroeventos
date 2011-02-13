@@ -3,6 +3,22 @@
 class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 {
 
+    protected function _initAutoload()
+    {
+
+        $autoloader = new Zend_Application_Module_Autoloader(array(
+            'namespace' => '',
+            'basePath'  => dirname(__FILE__),
+        ));
+
+        $autoloader = Zend_Loader_Autoloader::getInstance();
+        $autoloader->registerNamespace('Queroeventos');
+
+        return $autoloader;
+
+    }
+
+
     protected function _initConfig()
     {
         $config = new Zend_Config_Ini(APPLICATION_PATH . '/configs/application.ini', 'development');
@@ -31,5 +47,60 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 
     }
 
+    
+    protected function _initPluginLayout()
+    {
+        $bootstrap = $this->getApplication();
+
+        /**
+         * Se minha aplicação está sendo extendido da Zend_Application,
+         * $bootstrap recebe $this.
+         */
+        if($bootstrap instanceof Zend_Application)
+        {
+            $bootstrap = $this;
+        }
+
+        /**
+         * Recupera FrontController para manipulá-lo
+         */
+        $bootstrap->bootstrap('FrontController');
+        $front = $bootstrap->getResource('FrontController');
+
+        /**
+         * Registra o plugin no FrontController, para mudar os módulos
+         */
+        $plugin_layout = new Queroeventos_Layout();
+
+        $front->registerPlugin($plugin_layout);
+    }
+
+
+    protected function _initActionHelpers()
+    {
+
+        /**
+         * TODO: Criar os helpers necessários(ACL e outros)
+         */
+
+    }
+
+    protected function _initDocType()
+    {
+
+        $this->bootstrap('view');
+        $view = $this->getResource('view');
+        $view->doctype('XHTML1_STRICT');
+
+    }
+
+    protected function _initZendAuth()
+    {
+
+        /**
+         * TODO: Criar as regras de Auth/ACL...
+         */
+
+    }
 }
 
