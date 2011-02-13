@@ -1,6 +1,6 @@
 <?php
 
-class FewprivilagesController extends Zend_Controller_Action
+class Default_FewprivilagesController extends Zend_Controller_Action
 {
     public function init()
     {

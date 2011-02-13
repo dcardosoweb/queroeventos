@@ -1,6 +1,6 @@
 <?php
 
-class NotallowedController extends Zend_Controller_Action
+class Default_NotallowedController extends Zend_Controller_Action
 {
     public function init()
     {
